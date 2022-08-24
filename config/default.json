@@ -1,0 +1,10 @@
+{
+   
+    "Customer": {
+      "dbConfig": {
+        "host": "localhost",
+        "port": 5984,
+        "dbName": "mongodb+srv://Faisal:qOadZkM4fQ1byls4@cluster0.qi2u2l2.mongodb.net/?retryWrites=true&w=majority"
+      }
+    }
+  }
