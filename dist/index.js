@@ -30,7 +30,9 @@ const express_1 = __importDefault(require("express"));
 const mongoose_1 = require("mongoose");
 const userController = __importStar(require("./controllers/user_controllers"));
 const companyController = __importStar(require("./controllers/company_controllers"));
-const url = "mongodb+srv://test:GMOZuaHoTdosLYOh@cluster0.qi2u2l2.mongodb.net/?retryWrites=true&w=majority";
+const dotenv_1 = require("dotenv");
+(0, dotenv_1.config)();
+const url = String(process.env.url);
 (0, mongoose_1.connect)(url, (err) => {
     if (err) {
         console.log(err.message);
@@ -54,5 +56,5 @@ app.get("/company/:id", companyController.getUser);
 app.post("/company", companyController.addcompany);
 app.put("/company/:id", companyController.updateCompany);
 app.delete("/company/:id", companyController.deleteCompany);
-app.listen(10100, () => console.log("test"));
+app.listen(process.env.PORT, () => console.log("test"));
 //# sourceMappingURL=index.js.map

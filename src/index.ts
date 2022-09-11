@@ -2,8 +2,11 @@ import express from "express";
 import { connect } from "mongoose";
 import * as userController from "./controllers/user_controllers";
 import * as companyController from "./controllers/company_controllers";
+import { config } from "dotenv";
 
-const url = "mongodb+srv://test:GMOZuaHoTdosLYOh@cluster0.qi2u2l2.mongodb.net/?retryWrites=true&w=majority";
+config()
+
+const url = String (process.env.url);
 
 connect(url, (err: any) => {
   if (err) {
@@ -33,4 +36,4 @@ app.put("/company/:id", companyController.updateCompany);
 app.delete("/company/:id", companyController.deleteCompany);
 
 
-app.listen(10100,()=>console.log("test"));
+app.listen(process.env.PORT,()=>console.log("test"));
