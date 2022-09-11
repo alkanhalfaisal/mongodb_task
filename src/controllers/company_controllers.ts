@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import Company from "./../company";
 
-export let allCompanies = (req: Request, res: Response) => {
+export let allCompanies = (_: Request, res: Response) => {
+    // @ts-ignore
     let companies = Company.find((err: any, companies: any) => {
       if (err) {
         res.send(err.message);
@@ -12,6 +13,7 @@ export let allCompanies = (req: Request, res: Response) => {
   };
 
 export let getUser = (req: Request, res: Response) => {
+    // @ts-ignore
     let company = Company.findById(req.params.id, (err: any, company: any) => {
         if (err) {
             res.send(err.message);
@@ -22,6 +24,7 @@ export let getUser = (req: Request, res: Response) => {
 };
 
 export let deleteCompany = (req: Request, res: Response) => {
+    // @ts-ignore
     let company = Company.deleteOne({ _id: req.params.id }, (err: any) => {
         if (err) {
             res.send(err.message);
@@ -33,9 +36,11 @@ export let deleteCompany = (req: Request, res: Response) => {
 
 export let updateCompany = (req: Request, res: Response) => {
     console.log(req.body);
+    // @ts-ignore
     let company = Company.findByIdAndUpdate(
         req.params.id,
         req.body,
+        // @ts-ignore
         (err: any, company: any) => {
             if (err) {
                 res.send(err.message);

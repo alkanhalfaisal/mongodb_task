@@ -2,7 +2,9 @@ import { Request, Response } from "express";
 import User from "./../user";
 import bcrypt from "bcrypt";
 
+// @ts-ignore
 export let allUsers = (req: Request, res: Response) => {
+    // @ts-ignore
     let users = User.find((err: any, users: any) => {
       if (err) {
         res.send(err.message);
@@ -13,6 +15,7 @@ export let allUsers = (req: Request, res: Response) => {
   };
 
 export let getUser = (req: Request, res: Response) => {
+    // @ts-ignore
     let user = User.findById(req.params.id, (err: any, user: any) => {
         if (err) {
             res.send(err.message);
@@ -23,6 +26,7 @@ export let getUser = (req: Request, res: Response) => {
 };
 
 export let deleteUser = (req: Request, res: Response) => {
+    // @ts-ignore
     let user = User.deleteOne({ _id: req.params.id }, (err: any) => {
         if (err) {
             res.send(err.message);
@@ -34,9 +38,11 @@ export let deleteUser = (req: Request, res: Response) => {
 
 export let updateUser = (req: Request, res: Response) => {
     console.log(req.body);
+    // @ts-ignore
     let user = User.findByIdAndUpdate(
         req.params.id,
         req.body,
+        // @ts-ignore
         (err: any, user: any) => {
             if (err) {
                 res.send(err.message);

@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.addcompany = exports.updateCompany = exports.deleteCompany = exports.getUser = exports.allCompanies = void 0;
 const company_1 = __importDefault(require("./../company"));
-let allCompanies = (req, res) => {
+let allCompanies = (_, res) => {
     let companies = company_1.default.find((err, companies) => {
         if (err) {
             res.send(err.message);
