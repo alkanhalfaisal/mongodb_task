@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.addUser = exports.updateUser = exports.deleteUser = exports.getUser = exports.allUsers = void 0;
 const user_1 = __importDefault(require("./../user"));
+const bcrypt_1 = __importDefault(require("bcrypt"));
 let allUsers = (req, res) => {
     let users = user_1.default.find((err, users) => {
         if (err) {
@@ -50,8 +51,13 @@ let updateUser = (req, res) => {
     });
 };
 exports.updateUser = updateUser;
-let addUser = (req, res) => {
-    var user = new user_1.default(req.body);
+let addUser = async (req, res) => {
+    var user = new user_1.default();
+    const salt = await bcrypt_1.default.genSalt();
+    user.name = req.body.name;
+    user.phone = req.body.phone;
+    user.email = req.body.email;
+    user.password = await bcrypt_1.default.hash(req.body.password, salt);
     console.log(req.body);
     console.log(user);
     user.save((err) => {

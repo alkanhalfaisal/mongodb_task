@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import User from "./../user";
+import bcrypt from "bcrypt";
 
 export let allUsers = (req: Request, res: Response) => {
     let users = User.find((err: any, users: any) => {
@@ -46,8 +47,15 @@ export let updateUser = (req: Request, res: Response) => {
     );
 };
 
-export let addUser = (req: Request, res: Response) => {
-    var user = new User(req.body);
+export let addUser = async (req: Request, res: Response) : Promise<void> => {
+    var user = new User();
+    const salt = await bcrypt.genSalt()
+    
+    user.name = req.body.name;
+    user.phone = req.body.phone;
+    user.email = req.body.email;
+    user.password = await bcrypt.hash(req.body.password,salt)
+
     console.log(req.body);
     console.log(user);
     user.save((err: any) => {
