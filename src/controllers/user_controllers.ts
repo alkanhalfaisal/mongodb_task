@@ -36,8 +36,16 @@ export let deleteUser = (req: Request, res: Response) => {
     });
 };
 
-export let updateUser = (req: Request, res: Response) => {
+export let updateUser = async (req: Request, res: Response) : Promise<void> => {
     console.log(req.body);
+    const salt = await bcrypt.genSalt()
+    
+    req.body.name = req.body.name;
+    req.body.phone = req.body.phone;
+    req.body.email = req.body.email;
+    req.body.password = await bcrypt.hash(req.body.password,salt)
+
+
     // @ts-ignore
     let user = User.findByIdAndUpdate(
         req.params.id,

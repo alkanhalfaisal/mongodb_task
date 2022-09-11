@@ -39,8 +39,13 @@ let deleteUser = (req, res) => {
     });
 };
 exports.deleteUser = deleteUser;
-let updateUser = (req, res) => {
+let updateUser = async (req, res) => {
     console.log(req.body);
+    const salt = await bcrypt_1.default.genSalt();
+    req.body.name = req.body.name;
+    req.body.phone = req.body.phone;
+    req.body.email = req.body.email;
+    req.body.password = await bcrypt_1.default.hash(req.body.password, salt);
     let user = user_1.default.findByIdAndUpdate(req.params.id, req.body, (err, user) => {
         if (err) {
             res.send(err.message);
